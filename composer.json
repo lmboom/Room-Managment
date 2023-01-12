@@ -1,6 +1,6 @@
 {
     "name": "lmboom/room-managment",
-    "description": "Console App for room managment. Alif Task",
+    "description": "Console App for room management. Alif Task",
     "type": "console-app",
     "license": "MIT",
     "authors": [
@@ -9,5 +9,12 @@
             "email": "popkorn.passport@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "RoomManagment\\Cli\\": "src/"
+        }
+    },
 }
