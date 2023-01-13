@@ -2,7 +2,10 @@
 
 namespace RoomManagment\Cli;
 
-use RoomManagment\Cli\Commands\ICommand;
+use Exception;
+use RoomManagment\Utils\Input;
+use RoomManagment\Utils\Output;
+use RoomManagment\Cli\Interfaces\ICommand;
 
 final class Application
 {
@@ -10,7 +13,7 @@ final class Application
     /**
      * @param ICommand[] $commands
      */
-    private $commands;
+    private        $commands;
     private string $version = '0.0.1';
     private        $onExit;
 
@@ -38,28 +41,33 @@ final class Application
         return $this->version;
     }
 
-    public function run()
-    {
-
-    }
-
     public function addCommand(ICommand $command): void
     {
         //save commands by them alias.
         $this->commands[$command->getAlias()] = $command;
     }
 
-    public function handle(string $alias, array $input): Output
+    public function handle(Input $input): Output
     {
-        $command = $this->getCommandByAlias($alias);
-        $output  = $command->handle();
+        if (count($input) < 3) {
+            throw new Exception('Not enough arguments');
+        }
+        $command = $this->getCommandByAlias($input[1]);
+        $output  = $command->handle($input->getParams());
 
         return new Output($output);
     }
 
     public function getCommandByAlias($alias): ICommand
     {
+        if (!key_exists($alias, $this->commands)) {
+            throw new Exception('Command not found');
+        }
         return $this->commands[$alias];
     }
 
+    public function showHelp()
+    {
+
+    }
 }

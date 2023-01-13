@@ -18,4 +18,6 @@ $roomStatusCommand = new RoomStatusCommand('room-status');
 $application->addCommand($holdRoomCommand);
 $application->addCommand($roomStatusCommand);
 
-$application->handle($argv);
+$input = new Input($argv);
+$output = $application->handle($input);
+//$output->
