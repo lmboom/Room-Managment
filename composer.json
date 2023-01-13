@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "php": ">=8.2"
+        "php": ">=8.2",
+        "ext-sqlite3": "*"
     },
     "autoload": {
         "psr-4": {

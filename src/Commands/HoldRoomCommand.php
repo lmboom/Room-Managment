@@ -4,13 +4,12 @@ namespace RoomManagment\Cli\Commands;
 
 class HoldRoomCommand extends Command implements ICommand
 {
-    public function handle(): bool
+    public function handle($roomId, $time): bool
     {
-        // TODO: Implement handle() method.
-    }
-
-    public function setParam(string $param)
-    {
-        // TODO: Implement setParam() method.
+        $room = $this->roomRepository->create($roomId, [
+            'is_hold' => true,
+            'hold_time' => $time
+        ]);
+        return $room->is_hold;
     }
 }

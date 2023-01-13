@@ -2,16 +2,13 @@
 
 namespace RoomManagment\Cli\Commands;
 
+use RoomManagment\Cli\Room;
+
 class RoomStatusCommand extends Command implements ICommand
 {
 
-    public function handle(): bool
+    public function handle($roomId, $time): bool
     {
-
-    }
-
-    public function setParam(string $param)
-    {
-        // TODO: Implement setParam() method.
+        $roomModel = (new Room())->isRoomHold($roomId, $time);
     }
 }
