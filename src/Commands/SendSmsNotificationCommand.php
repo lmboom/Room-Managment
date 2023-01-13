@@ -3,6 +3,7 @@
 namespace RoomManagment\Cli\Commands;
 
 use RoomManagment\Cli\Interfaces\ISender;
+use RoomManagment\Cli\Interfaces\ICommand;
 
 class SendSmsNotificationCommand extends Command implements ICommand, ISender
 {

@@ -3,6 +3,7 @@
 namespace RoomManagment\Cli\Commands;
 
 use RoomManagment\Cli\Room;
+use RoomManagment\Cli\Interfaces\ICommand;
 
 class RoomStatusCommand extends Command implements ICommand
 {

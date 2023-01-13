@@ -21,7 +21,7 @@ class Room
     {
         $sql    = $this->db->escapeString("SELECT * FROM {$this->table} WHERE room_id = {$roomId} and time = {$time}");
         $result = $this->db->query($sql);
-
+dd($result);
 
     }
 

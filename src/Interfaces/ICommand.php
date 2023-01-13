@@ -1,6 +1,6 @@
 <?php
 
-namespace RoomManagment\Cli\Commands;
+namespace RoomManagment\Cli\Interfaces;
 
 interface ICommand
 {
