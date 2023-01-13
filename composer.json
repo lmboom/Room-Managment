@@ -17,5 +17,8 @@
         "psr-4": {
             "RoomManagment\\Cli\\": "src/"
         }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^6.2"
     }
 }
