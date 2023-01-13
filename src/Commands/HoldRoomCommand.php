@@ -2,10 +2,8 @@
 
 namespace RoomManagment\Cli\Commands;
 
-class HoldRoomCommand implements ICommand
+class HoldRoomCommand extends Command implements ICommand
 {
-    private array $params = [];
-
     public function handle(): bool
     {
         // TODO: Implement handle() method.

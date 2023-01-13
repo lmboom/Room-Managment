@@ -2,9 +2,8 @@
 
 namespace RoomManagment\Cli\Commands;
 
-class RoomStatusCommand implements ICommand
+class RoomStatusCommand extends Command implements ICommand
 {
-    private array $params = [];
 
     public function handle(): bool
     {

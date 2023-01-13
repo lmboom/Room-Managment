@@ -4,11 +4,8 @@ namespace RoomManagment\Cli\Commands;
 
 use RoomManagment\Cli\Interfaces\ISender;
 
-class SendSmsNotificationCommand implements ICommand, ISender
+class SendSmsNotificationCommand extends Command implements ICommand, ISender
 {
-    private array $params = [];
-    public function __construct(private readonly ISender $notificationSender){}
-
     public function handle(): bool
     {
         // TODO: Implement handle() method.
