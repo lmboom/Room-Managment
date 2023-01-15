@@ -9,7 +9,7 @@ class Room extends Model
 {
     private string $table = 'room_reservations';
 
-    public function isRoomHold($roomId, $timeFrom, $timeTo): array
+    public function isRoomReserved($roomId, $timeFrom, $timeTo): array
     {
         $timeFrom   = strtotime($timeFrom);
         $timeTo     = strtotime($timeTo);
@@ -18,22 +18,22 @@ class Room extends Model
                 SELECT * FROM 
                              {$this->table} 
                 WHERE room_id = {$roomId} and (
-                    ({$timeTo} >= hold_from and {$timeFrom}<= hold_to)
+                    ({$timeTo} >= reserve_from and {$timeFrom}<= reserve_to)
                 )"
         );
 
         return $this->db->querySingle($sql, true);
     }
 
-    public function holdRoom(array $data): int
+    public function reserveRoom(array $data): int
     {
-        if ($data['hold_from'] >= $data['hold_to']) {
+        if ($data['reserve_from'] >= $data['reserve_to']) {
             throw new InvalidArgumentException('Wrong time condition');
         }
         $this->db->exec("
                      INSERT INTO 
-                         {$this->table} (room_id, user_id, hold_from, hold_to) 
-                     VALUES({$data['room_id']},{$data['user_id']}, {$data['hold_from']}, {$data['hold_to']})");
+                         {$this->table} (room_id, user_id, reserve_from, reserve_to) 
+                     VALUES({$data['room_id']},{$data['user_id']}, {$data['reserve_from']}, {$data['reserve_to']})");
 
         return $this->db->lastInsertRowID();
     }

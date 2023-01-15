@@ -7,9 +7,9 @@ require 'vendor/autoload.php';
 
 use RoomManagment\Cli\Application;
 use RoomManagment\Cli\Utils\Input;
-use RoomManagment\Cli\Commands\HoldRoomCommand;
 use RoomManagment\Cli\Commands\RoomStatusCommand;
 use RoomManagment\Cli\Commands\CreateUserCommand;
+use RoomManagment\Cli\Commands\ReserveRoomCommand;
 use RoomManagment\Cli\Exceptions\UserNotFoundException;
 use RoomManagment\Cli\Exceptions\InvalidArgumentException;
 
@@ -17,11 +17,11 @@ const APP_NAME = 'Room Management';
 
 $application = new Application(APP_NAME, fn () => dd('Bye.', true));
 
-$holdRoomCommand   = new HoldRoomCommand('hold-room');
-$roomStatusCommand = new RoomStatusCommand('room-status');
-$createUserCommand = new CreateUserCommand('create-user');
+$reserveRoomCommand = new ReserveRoomCommand('reserve-room');
+$roomStatusCommand  = new RoomStatusCommand('room-status');
+$createUserCommand  = new CreateUserCommand('create-user');
 
-$application->addCommand($holdRoomCommand);
+$application->addCommand($reserveRoomCommand);
 $application->addCommand($roomStatusCommand);
 $application->addCommand($createUserCommand);
 

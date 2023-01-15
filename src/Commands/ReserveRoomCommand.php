@@ -8,9 +8,9 @@ use RoomManagment\Cli\Utils\Output;
 use RoomManagment\Cli\Interfaces\ICommand;
 use RoomManagment\Cli\Exceptions\UserNotFoundException;
 
-class HoldRoomCommand extends Command implements ICommand
+class ReserveRoomCommand extends Command implements ICommand
 {
-    public string $executeExample = 'php index.php alias=hold-room roomId={} userId={} timeFrom="{}" timeTo="{}"';
+    public string $executeExample = 'php index.php alias=reserve-room roomId={} userId={} timeFrom="{}" timeTo="{}"';
 
     public function handle($roomId, $userId, $timeFrom, $timeTo): Output
     {
@@ -19,21 +19,21 @@ class HoldRoomCommand extends Command implements ICommand
             throw new UserNotFoundException();
         }
 
-        $isRoomReserved = (new Room())->isRoomHold($roomId, $timeFrom, $timeTo);
+        $isRoomReserved = (new Room())->isRoomReserved($roomId, $timeFrom, $timeTo);
 
         if ($isRoomReserved) {
             $reservedRoomUser = (new User())->getUser($isRoomReserved['user_id']);
-            $timeFrom         = date('d M Y H:i', $isRoomReserved['hold_from']);
-            $timeTo           = date('d M Y H:i', $isRoomReserved['hold_to']);
+            $timeFrom         = date('d M Y H:i', $isRoomReserved['reserve_from']);
+            $timeTo           = date('d M Y H:i', $isRoomReserved['reserve_to']);
 
             return new Output("Room has been already reserved by {$reservedRoomUser['username']}.\nReservation Period: $timeFrom - $timeTo ");
         }
 
-        (new Room())->holdRoom([
+        (new Room())->reserveRoom([
             'user_id'   => $userId,
             'room_id'   => $roomId,
-            'hold_from' => strtotime($timeFrom),
-            'hold_to'   => strtotime($timeTo),
+            'reserve_from' => strtotime($timeFrom),
+            'reserve_to'   => strtotime($timeTo),
         ]);
 
 
