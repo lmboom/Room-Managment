@@ -36,11 +36,6 @@ final class Application
         return $this->name;
     }
 
-    public function version(): string
-    {
-        return $this->version;
-    }
-
     public function addCommand(ICommand $command): void
     {
         //save commands by them alias.
@@ -64,15 +59,5 @@ final class Application
             throw new InvalidArgumentException('Command with specified alias not found not found');
         }
         return $this->commands[$alias];
-    }
-
-    public function showHelpWithMessage(): void
-    {
-
-    }
-
-    public function showRunCommand(string $executeExample)
-    {
-
     }
 }
