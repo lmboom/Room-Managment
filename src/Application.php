@@ -52,8 +52,8 @@ final class Application
      */
     public function handle(Input $input): Output
     {
-        $command = $this->getCommandByAlias($input[1]);
-        $output  = $command->handle($input->getParams());
+        $command = $this->getCommandByAlias($input->getAlias());
+        $output  = $command->handle(...$input->getCommandParams());
 
         return new Output($output);
     }

@@ -2,6 +2,8 @@
 
 namespace RoomManagment\Cli\Utils;
 
+use RoomManagment\Cli\Exceptions\InvalidArgumentException;
+
 readonly class Input
 {
     private array $params;
@@ -14,9 +16,23 @@ readonly class Input
         $this->params = $argv;
     }
 
-    public function getParams(): array
+    public function getCommandParams(): array
     {
-        return $this->params;
+        //remove alias
+        $params = $this->params;
+        unset($params[1]);
+
+        return $params;
+    }
+
+    public function getAlias(): string
+    {
+        $params = $this->params;
+        if (!isset($params[1]) && !is_string($params[1])){
+            throw new InvalidArgumentException('Alias is missed.');
+        }
+
+        return $params[1];
     }
 
     public function argumentsCount(): int

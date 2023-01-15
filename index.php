@@ -5,8 +5,8 @@ if (php_sapi_name() !== 'cli') {
 require 'vendor/autoload.php';
 
 
-use RoomManagment\Utils\Input;
 use RoomManagment\Cli\Application;
+use RoomManagment\Cli\Utils\Input;
 use RoomManagment\Cli\Commands\HoldRoomCommand;
 use RoomManagment\Cli\Commands\RoomStatusCommand;
 use RoomManagment\Cli\Exceptions\InvalidArgumentException;
