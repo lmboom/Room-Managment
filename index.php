@@ -36,5 +36,5 @@ try {
 } catch (InvalidArgumentException $e) {
     dd($e->getMessage());
 } catch (UserNotFoundException $e) {
-    dd($createUserCommand->executeExample);
+    dd("User not found. Please create user before reserve room.\nuse '{$createUserCommand->executeExample}' to create user");
 }
