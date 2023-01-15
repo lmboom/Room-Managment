@@ -16,15 +16,14 @@ class User extends Model
         return $this->db->lastInsertRowID();
     }
 
-    public function isUserExist($userId): bool
+    public function getUser($userId)
     {
         $sql  = $this->db->escapeString("
                 SELECT * FROM 
                              {$this->table} 
                 WHERE id = {$userId}");
-        $user = $this->db->querySingle($sql);
 
-        return (bool)$user;
+        return $this->db->querySingle($sql,true );
     }
 
 
