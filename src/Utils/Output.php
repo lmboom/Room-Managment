@@ -1,6 +1,6 @@
 <?php
 
-namespace RoomManagment\Utils;
+namespace RoomManagment\Cli\Utils;
 
 class Output
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace RoomManagment\Utils;
+namespace RoomManagment\Cli\Utils;
 
 readonly class Input
 {
@@ -14,7 +14,7 @@ readonly class Input
         $this->params = $argv;
     }
 
-    public function getParams()
+    public function getParams(): array
     {
         return $this->params;
     }

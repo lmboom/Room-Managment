@@ -2,10 +2,10 @@
 
 namespace RoomManagment\Cli;
 
-use Exception;
-use RoomManagment\Utils\Input;
-use RoomManagment\Utils\Output;
+use RoomManagment\Cli\Utils\Input;
+use RoomManagment\Cli\Utils\Output;
 use RoomManagment\Cli\Interfaces\ICommand;
+use RoomManagment\Cli\Exceptions\InvalidArgumentException;
 
 final class Application
 {
@@ -13,8 +13,8 @@ final class Application
     /**
      * @param ICommand[] $commands
      */
-    private        $commands;
-    private string $version = '0.0.1';
+    private array  $commands;
+    private string $version = '1.0.0';
     private        $onExit;
 
     public function __construct(readonly string $name, callable $onExit = null)
@@ -47,11 +47,11 @@ final class Application
         $this->commands[$command->getAlias()] = $command;
     }
 
+    /**
+     * @throws \RoomManagment\Cli\Exceptions\InvalidArgumentException
+     */
     public function handle(Input $input): Output
     {
-        if ($input->argumentsCount() < 2) {
-            throw new Exception('Not enough arguments');
-        }
         $command = $this->getCommandByAlias($input[1]);
         $output  = $command->handle($input->getParams());
 
@@ -61,12 +61,12 @@ final class Application
     public function getCommandByAlias($alias): ICommand
     {
         if (!key_exists($alias, $this->commands)) {
-            throw new Exception('Command not found');
+            throw new InvalidArgumentException('Command with specified alias not found not found');
         }
         return $this->commands[$alias];
     }
 
-    public function showHelp()
+    public function showHelpWithMessage(): void
     {
 
     }
