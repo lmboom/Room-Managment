@@ -19,4 +19,13 @@ class Room extends Model
         return (bool)$result;
     }
 
+    public function holdRoom(array $data): bool
+    {
+        $sql    = $this->db->escapeString("
+                     INSERT INTO 
+                         {$this->table} (user_id, time_from, time_to) 
+                     VALUES({$data['user_id']}, {$data['time_from']}, {$data['time_to']})");
+        return $this->db->exec($sql);
+    }
+
 }

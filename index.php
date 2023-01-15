@@ -9,25 +9,32 @@ use RoomManagment\Cli\Application;
 use RoomManagment\Cli\Utils\Input;
 use RoomManagment\Cli\Commands\HoldRoomCommand;
 use RoomManagment\Cli\Commands\RoomStatusCommand;
+use RoomManagment\Cli\Commands\CreateUserCommand;
+use RoomManagment\Cli\Exceptions\UserNotFoundException;
 use RoomManagment\Cli\Exceptions\InvalidArgumentException;
 
 const APP_NAME = 'Room Management';
 
-$application = new Application(APP_NAME, fn () => print_r('Bye.', true));
+$application = new Application(APP_NAME, fn () => dd('Bye.', true));
 
 $holdRoomCommand   = new HoldRoomCommand('hold-room');
 $roomStatusCommand = new RoomStatusCommand('room-status');
+$createUserCommand = new CreateUserCommand('create-user');
 
 $application->addCommand($holdRoomCommand);
 $application->addCommand($roomStatusCommand);
+$application->addCommand($createUserCommand);
 
 $input = new Input($argv);
 if ($input->argumentsCount() < 2) {
-    $application->showHelpWithMessage('Not enough arguments');
+    dd('Not enough arguments');
 }
 
 try {
     $output = $application->handle($input);
+    dd($output->getMessage());
 } catch (InvalidArgumentException $e) {
-    $application->showHelpWithMessage($e->getMessage());
+    dd($e->getMessage());
+} catch (UserNotFoundException $e) {
+    dd($createUserCommand->executeExample);
 }

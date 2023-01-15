@@ -49,13 +49,13 @@ final class Application
 
     /**
      * @throws \RoomManagment\Cli\Exceptions\InvalidArgumentException
+     * @throws \RoomManagment\Cli\Exceptions\UserNotFoundException
      */
     public function handle(Input $input): Output
     {
         $command = $this->getCommandByAlias($input->getAlias());
-        $output  = $command->handle(...$input->getCommandParams());
 
-        return new Output($output);
+        return $command->handle(...$input->getCommandParams());
     }
 
     public function getCommandByAlias($alias): ICommand
@@ -67,6 +67,11 @@ final class Application
     }
 
     public function showHelpWithMessage(): void
+    {
+
+    }
+
+    public function showRunCommand(string $executeExample)
     {
 
     }

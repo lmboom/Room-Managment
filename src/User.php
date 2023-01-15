@@ -6,9 +6,14 @@ class User extends Model
 {
     private string $table = 'users';
 
-    public function createUser($data): object
+    public function createUser($username, $email, $phone): int
     {
-        return (bool)$result;
+        $this->db->exec("
+                     INSERT INTO 
+                         {$this->table} (username, email, phone) 
+                     VALUES('{$username}', '{$email}', '{$phone}')");
+
+        return $this->db->lastInsertRowID();
     }
 
     public function isUserExist($userId): bool

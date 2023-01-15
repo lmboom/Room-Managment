@@ -13,14 +13,16 @@ readonly class Input
         //remove filename;
         unset($argv[0]);
 
-        $this->params = $argv;
+        $query_string = implode('&', $argv);
+        parse_str($query_string, $params);
+        $this->params = $params;
     }
 
     public function getCommandParams(): array
     {
         //remove alias
         $params = $this->params;
-        unset($params[1]);
+        unset($params['alias']);
 
         return $params;
     }
@@ -28,11 +30,11 @@ readonly class Input
     public function getAlias(): string
     {
         $params = $this->params;
-        if (!isset($params[1]) && !is_string($params[1])){
+        if (!isset($params['alias']) && !is_string($params['alias'])){
             throw new InvalidArgumentException('Alias is missed.');
         }
 
-        return $params[1];
+        return $params['alias'];
     }
 
     public function argumentsCount(): int
