@@ -5,6 +5,7 @@ if (php_sapi_name() !== 'cli') {
 require 'vendor/autoload.php';
 
 
+use RoomManagment\Utils\Input;
 use RoomManagment\Cli\Application;
 use RoomManagment\Cli\Commands\HoldRoomCommand;
 use RoomManagment\Cli\Commands\RoomStatusCommand;
@@ -19,5 +20,8 @@ $application->addCommand($holdRoomCommand);
 $application->addCommand($roomStatusCommand);
 
 $input = new Input($argv);
-$output = $application->handle($input);
-//$output->
+try {
+    $output = $application->handle($input);
+} catch (Exception $e) {
+    $application->showHelp();
+}

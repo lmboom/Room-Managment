@@ -2,15 +2,25 @@
 
 namespace RoomManagment\Utils;
 
-class Input
+readonly class Input
 {
-    public function __construct()
-    {
+    private array $params;
 
+    public function __construct(public array $argv)
+    {
+        //remove filename;
+        unset($argv[0]);
+
+        $this->params = $argv;
     }
 
     public function getParams()
     {
+        return $this->params;
+    }
 
+    public function argumentsCount(): int
+    {
+        return count($this->params);
     }
 }

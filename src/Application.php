@@ -49,7 +49,7 @@ final class Application
 
     public function handle(Input $input): Output
     {
-        if (count($input) < 3) {
+        if ($input->argumentsCount() < 2) {
             throw new Exception('Not enough arguments');
         }
         $command = $this->getCommandByAlias($input[1]);
