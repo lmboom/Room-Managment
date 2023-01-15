@@ -11,16 +11,15 @@ class Room extends Model
 
     public function isRoomReserved($roomId, $timeFrom, $timeTo): array
     {
-        $timeFrom   = strtotime($timeFrom);
-        $timeTo     = strtotime($timeTo);
+        $timeFrom = strtotime($timeFrom);
+        $timeTo   = strtotime($timeTo);
 
-        $sql    = $this->db->escapeString("
+        $sql = $this->db->escapeString("
                 SELECT * FROM 
                              {$this->table} 
                 WHERE room_id = {$roomId} and (
                     ({$timeTo} >= reserve_from and {$timeFrom}<= reserve_to)
-                )"
-        );
+                )");
 
         return $this->db->querySingle($sql, true);
     }

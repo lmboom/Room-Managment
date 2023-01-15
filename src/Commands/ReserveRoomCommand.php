@@ -12,7 +12,7 @@ class ReserveRoomCommand extends Command implements ICommand
 {
     public string $executeExample = 'php index.php alias=reserve-room roomId={} userId={} timeFrom="{}" timeTo="{}"';
 
-    public function handle($roomId, $userId, $timeFrom, $timeTo): Output
+    public function handle($roomId, $userId, $timeFrom, $timeTo, $sendNotification = false): Output
     {
         $user = (new User())->getUser($userId);
         if (!$user) {
